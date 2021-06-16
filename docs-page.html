@@ -41,7 +41,7 @@
 	            <div class="docs-top-utilities d-flex justify-content-end align-items-center">
 	                <div class="top-search-box d-none d-lg-flex">
 	                </div>
-		            <a href="https://themes.3rdwavemedia.com/bootstrap-templates/startup/coderdocs-free-bootstrap-4-documentation-template-for-software-projects/" class="btn btn-primary d-none d-lg-flex">Download</a>
+		            <a href="/Application/Application-DSP.rar" class="btn btn-primary d-none d-lg-flex">Download</a>
 	            </div><!--//docs-top-utilities-->
             </div><!--//container-->
         </div><!--//branding-->
@@ -172,106 +172,14 @@
 	There are many circumstances in which we need to determine the frequency content of a time-domain signal. For example, we may have to analyze the spectrum of the output of an LC oscillator to see how much noise is present in the produced sine wave. This can be achieved by the discrete Fourier transform (DFT). The DFT is usually considered as one of the two most powerful tools in digital signal processing (the other one being digital filtering), and though we arrived at this topic introducing the problem of spectrum estimation, the DFT has several other applications in DSP.</p>					</section><!--//section-->
 					
 	<p > The discrete Fourier transform (DFT) converts a finite sequence of equally-spaced samples of a function into a same-length sequence of equally-spaced samples of the discrete-time Fourier transform (DTFT), which is a complex-valued function of frequency. The interval at which the DTFT is sampled is the reciprocal of the duration of the input sequence. An inverse DFT is a Fourier series, using the DTFT samples as coefficients of complex sinusoids at the corresponding DTFT frequencies. It has the same sample-values as the original input sequence. The DFT is therefore said to be a frequency domain representation of the original input sequence. If the original sequence spans all the non-zero values of a function, its DTFT is continuous (and periodic), and the DFT provides discrete samples of one cycle. If the original sequence is one cycle of a periodic function, the DFT provides all the non-zero values of one DTFT cycle.</p>
-	<pre class="shadow-lg rounded"><code class="json hljs">
-							
-		<span class="hljs-attr">
-			<br>
-			clear all;
-			xn=input('Enter the sequence x(n)'); %Get the sequence from user
-			ln=length(xn); %find the length of the sequence
-			xk=zeros(1,ln); %initialize an array of same size as that of input sequence
-			ixk=zeros(1,ln); %initialize an array of same size as that of input sequence
-			%DFT of the sequence
-			%-----------------------------------------------------
-			for k=0:ln-1
-			 for n=0:ln-1
-			 xk(k+1)=xk(k+1)+(xn(n+1)*exp((i)*2*pi*k*n/ln));
-			 end
-			end
-			%------------------------------------------------------
-			%Plotting input sequence
-			%-----------------------------------------------------
-			t=0:ln-1;
-			subplot(221);
-			stem(t,xn);
-			ylabel ('Amplitude');
-			xlabel ('Time Index');
-			title('Input Sequence');magnitude=abs(xk); % Find the magnitudes of individual DFT points
-			% plot the magnitude response
-			%------------------------------------------------------------
-			t=0:ln-1;
-			subplot(222);
-			stem(t,magnitude);
-			ylabel ('Amplitude');
-			xlabel ('K');
-			title('Magnitude Response');
-			%------------------------------------------------------------
-			phase=angle(xk); % Find the phases of individual DFT points % plot the magnitude
-			sequence
-			%------------------------------------------------------------
-			t=0:ln-1;
-			subplot(223);
-			stem(t,phase);
-			ylabel ('Phase');
-			xlabel ('K');
-			title ('Phase Response');
-			%------------------------------------------------------------
-			%IDFT of the sequence
-			%------------------------------------------------------------
-			for n=0:ln-1
-			 for k=0:ln-1
-			 ixk(n+1)=ixk(n+1)+(xk(k+1)*exp(i*2*pi*k*n/ln));
-			 end
-			end
-			ixk=ixk./ln;
-			%------------------------------------------------------------
-			%code block to plot the input sequence
-			%------------------------------------------------------------
-			t=0:ln-1;
-			subplot(224);
-			stem(t,ixk);
-			ylabel ('Amplitude');
-			xlabel ('Time Index');
-			title ('IDFT sequence');
-		  <br></span>,
-	  
-	</code></pre> 
+	<script src="https://gist.github.com/vineetjk/e0eecaf3717979c30aa1ba8bba32c1a1.js?file=dft.m"></script>
 				
 					<section class="docs-section" id="item-3-3">
 						<h2 class="section-heading">Fast Fourier Transform (FFT)</h2>
 						<p>  A fast Fourier transform (FFT) is an algorithm that computes the discrete Fourier transform (DFT) of a sequence, or its inverse (IDFT). Fourier analysis converts a signal from its original domain (often time or space) to a representation in the frequency domain and vice versa. The DFT is obtained by decomposing a sequence of values into components of different frequencies.[1] This operation is useful in many fields, but computing it directly from the definition is often too slow to be practical. An FFT rapidly computes such transformations by factorizing the DFT matrix into a product of sparse (mostly zero) factors.  </p>
-						<pre class="shadow-lg rounded"><code class="json hljs">
-							
-							<span class="hljs-attr">
-clc;
-clear all;
-close all;
-x=input('Enter the sequence : ')
-N=length(x)
-xK=fft(x,N)
-xn=ifft(xK)
-n=0:N-1;
-subplot (2,2,1);
-stem(n,x);
-xlabel('n---->');
-ylabel('amplitude');
-title('input sequence');
-subplot (2,2,2);
-stem(n,abs(xK));
-xlabel('n---->');
-ylabel('magnitude');
-title('magnitude response');
-subplot (2,2,3);
-stem(n,angle(xK));
-xlabel('n---->');
-ylabel('phase');
-title('Phase responce');
-subplot (2,2,4);
-stem(n,xn);
-xlabel('n---->');
-ylabel('amplitude');</span>,
-						  
-						</code></pre> 
+						 
+						<script src="https://gist.github.com/vineetjk/e0eecaf3717979c30aa1ba8bba32c1a1.js?file=fft.m"></script>
+
 					</section><!--//section-->
 			    </article><!--//docs-article-->
 			    
